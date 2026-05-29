@@ -4,6 +4,12 @@ import joblib
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+st.set_page_config(
+    page_title="House Price Prediction",
+    page_icon="🏠",
+    layout="wide"
+)
+
 # Load model
 model = joblib.load("app/house_price_model.pkl")
 
@@ -24,7 +30,7 @@ st.sidebar.info(
     ✅ Area  
     ✅ Bedrooms  
     ✅ Bathrooms  
-    ✅ flor  
+    ✅ floors  
     ✅ Parking
 
     Built using:
@@ -45,13 +51,27 @@ st.write(
     "Enter house details below to predict estimated house price."
 )
 
+col1, col2, col3 = st.columns(3)
+
+col1.metric("Total Houses", len(df))
+
+col2.metric(
+    "Average Price",
+    f"₹ {int(df['price'].mean()):,}"
+)
+
+col3.metric(
+    "Max Price",
+    f"₹ {int(df['price'].max()):,}"
+)
+
 st.subheader("📊 Housing Dataset Preview")
 
-st.dataframe(df.head())
+st.dataframe(df.head(10), use_container_width=True)
 
 st.subheader("💰 Price Distribution")
 
-st.bar_chart(df["price"])
+st.line_chart(df["price"])
 
 st.subheader("🏠 Area vs Price")
 
@@ -100,8 +120,8 @@ bathrooms = st.number_input(
     value=1
 )
 
-flor = st.number_input(
-    "flor",
+floors = st.number_input(
+    "floors",
     min_value=1,
     value=1
 )
@@ -122,7 +142,7 @@ if st.button("🔍 Predict House Price"):
         'area': [area],
         'bedrooms': [bedrooms],
         'bathrooms': [bathrooms],
-        'flor': [flor],
+        'floors': [floors],
         'parking': [parking]
     })
 
