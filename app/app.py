@@ -142,7 +142,7 @@ if st.button("🔍 Predict House Price"):
         'area': [area],
         'bedrooms': [bedrooms],
         'bathrooms': [bathrooms],
-        'floors': [floors],
+        'flor': [floors],
         'parking': [parking]
     })
 
