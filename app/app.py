@@ -9,12 +9,12 @@ st.set_page_config(
     page_icon="🏠",
     layout="wide"
 )
-
 st.markdown(
     """
     <style>
     .stApp {
-        background-color: #f5f7fa;
+        background-color: black;
+        color: white;
     }
     </style>
     """,
