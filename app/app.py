@@ -4,19 +4,11 @@ import joblib
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# =========================
-# PAGE CONFIGURATION
-# =========================
-
 st.set_page_config(
     page_title="House Price Prediction",
     page_icon="🏠",
     layout="wide"
 )
-
-# =========================
-# BACKGROUND COLOR
-# =========================
 
 st.markdown(
     """
@@ -28,14 +20,11 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# =========================
-# LOAD DATASET & MODEL
-# =========================
-
-df = pd.read_csv("app/Housing (2).csv")
-
+# Load model
 model = joblib.load("app/house_price_model.pkl")
+
+# Load dataset
+df = pd.read_csv("app/housing.csv")
 
 # =========================
 # SIDEBAR
@@ -43,38 +32,24 @@ model = joblib.load("app/house_price_model.pkl")
 
 st.sidebar.title("🏠 House Price Prediction")
 
-st.sidebar.markdown("---")
+st.sidebar.image("app/house.png")
 
 st.sidebar.info(
     """
-    ### 📌 About Project
-
     This Machine Learning app predicts
     house prices based on:
 
     ✅ Area  
     ✅ Bedrooms  
     ✅ Bathrooms  
-    ✅ Floors  
-    ✅ Parking  
+    ✅ floors  
+    ✅ Parking
 
-    ---
-
-    ### 🛠 Technologies Used
-
+    Built using:
     - Python
     - Pandas
-    - NumPy
     - Scikit-Learn
     - Streamlit
-    - Matplotlib
-    - Seaborn
-
-    ---
-
-    ### 👨‍💻 Developed By
-
-    Sachin
     """
 )
 
@@ -87,10 +62,6 @@ st.title("🏡 House Price Prediction System")
 st.write(
     "Enter house details below to predict estimated house price."
 )
-
-# =========================
-# METRICS SECTION
-# =========================
 
 col1, col2, col3 = st.columns(3)
 
@@ -106,28 +77,13 @@ col3.metric(
     f"₹ {int(df['price'].max()):,}"
 )
 
-# =========================
-# DATASET PREVIEW
-# =========================
-
 st.subheader("📊 Housing Dataset Preview")
 
-st.dataframe(
-    df.head(10),
-    use_container_width=True
-)
-
-# =========================
-# PRICE DISTRIBUTION
-# =========================
+st.dataframe(df.head(10), use_container_width=True)
 
 st.subheader("💰 Price Distribution")
 
 st.line_chart(df["price"])
-
-# =========================
-# AREA VS PRICE
-# =========================
 
 st.subheader("🏠 Area vs Price")
 
@@ -135,26 +91,15 @@ chart_data = df[["area", "price"]]
 
 st.line_chart(chart_data)
 
-# =========================
-# CORRELATION TABLE
-# =========================
-
 st.subheader("📈 Correlation Table")
 
 correlation = df.corr(numeric_only=True)
 
-st.dataframe(
-    correlation,
-    use_container_width=True
-)
-
-# =========================
-# HEATMAP
-# =========================
+st.dataframe(correlation)
 
 st.subheader("🌈 Correlation Heatmap")
 
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10,6))
 
 sns.heatmap(
     correlation,
@@ -169,8 +114,6 @@ st.pyplot(fig)
 # USER INPUTS
 # =========================
 
-st.subheader("🏠 Enter House Details")
-
 area = st.number_input(
     "Area (sqft)",
     min_value=0,
@@ -184,11 +127,10 @@ bedrooms = st.slider(
     2
 )
 
-bathrooms = st.slider(
+bathrooms = st.number_input(
     "Bathrooms",
-    1,
-    10,
-    1
+    min_value=1,
+    value=1
 )
 
 floors = st.slider(
@@ -204,7 +146,6 @@ parking = st.slider(
     5,
     1
 )
-
 # =========================
 # PREDICTION
 # =========================
@@ -234,7 +175,6 @@ if st.button("🔍 Predict House Price"):
     )
 
     st.balloons()
-
 # =========================
 # FOOTER
 # =========================
