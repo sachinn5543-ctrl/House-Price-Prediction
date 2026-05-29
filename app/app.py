@@ -4,21 +4,10 @@ import joblib
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# =========================
-# PAGE CONFIG
-# =========================
-
-st.set_page_config(
-    page_title="House Price Prediction",
-    page_icon="🏠",
-    layout="centered"
-)
-
-# =========================
-# LOAD MODEL
-# =========================
-
+# Load model
 model = joblib.load("app/house_price_model.pkl")
+
+# Load dataset
 df = pd.read_csv("app/Housing (2).csv")
 
 # =========================
@@ -86,6 +75,7 @@ sns.heatmap(
     cmap="coolwarm",
     ax=ax
 )
+
 st.pyplot(fig)
 
 # =========================
@@ -127,6 +117,7 @@ parking = st.number_input(
 # =========================
 
 if st.button("🔍 Predict House Price"):
+
     input_data = pd.DataFrame({
         'area': [area],
         'bedrooms': [bedrooms],
