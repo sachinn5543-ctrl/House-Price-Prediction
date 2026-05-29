@@ -4,17 +4,38 @@ import joblib
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# =========================
+# PAGE CONFIGURATION
+# =========================
+
 st.set_page_config(
     page_title="House Price Prediction",
     page_icon="🏠",
     layout="wide"
 )
 
-# Load model
-model = joblib.load("app/house_price_model.pkl")
+# =========================
+# BACKGROUND COLOR
+# =========================
 
-# Load dataset
-df = pd.read_csv("app/housing.csv")
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #f5f7fa;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# =========================
+# LOAD DATASET & MODEL
+# =========================
+
+df = pd.read_csv("app/Housing (2).csv")
+
+model = joblib.load("app/house_price_model.pkl")
 
 # =========================
 # SIDEBAR
@@ -22,22 +43,38 @@ df = pd.read_csv("app/housing.csv")
 
 st.sidebar.title("🏠 House Price Prediction")
 
+st.sidebar.markdown("---")
+
 st.sidebar.info(
     """
+    ### 📌 About Project
+
     This Machine Learning app predicts
     house prices based on:
 
     ✅ Area  
     ✅ Bedrooms  
     ✅ Bathrooms  
-    ✅ floors  
-    ✅ Parking
+    ✅ Floors  
+    ✅ Parking  
 
-    Built using:
+    ---
+
+    ### 🛠 Technologies Used
+
     - Python
     - Pandas
+    - NumPy
     - Scikit-Learn
     - Streamlit
+    - Matplotlib
+    - Seaborn
+
+    ---
+
+    ### 👨‍💻 Developed By
+
+    Sachin
     """
 )
 
@@ -50,6 +87,10 @@ st.title("🏡 House Price Prediction System")
 st.write(
     "Enter house details below to predict estimated house price."
 )
+
+# =========================
+# METRICS SECTION
+# =========================
 
 col1, col2, col3 = st.columns(3)
 
@@ -65,13 +106,28 @@ col3.metric(
     f"₹ {int(df['price'].max()):,}"
 )
 
+# =========================
+# DATASET PREVIEW
+# =========================
+
 st.subheader("📊 Housing Dataset Preview")
 
-st.dataframe(df.head(10), use_container_width=True)
+st.dataframe(
+    df.head(10),
+    use_container_width=True
+)
+
+# =========================
+# PRICE DISTRIBUTION
+# =========================
 
 st.subheader("💰 Price Distribution")
 
 st.line_chart(df["price"])
+
+# =========================
+# AREA VS PRICE
+# =========================
 
 st.subheader("🏠 Area vs Price")
 
@@ -79,15 +135,26 @@ chart_data = df[["area", "price"]]
 
 st.line_chart(chart_data)
 
+# =========================
+# CORRELATION TABLE
+# =========================
+
 st.subheader("📈 Correlation Table")
 
 correlation = df.corr(numeric_only=True)
 
-st.dataframe(correlation)
+st.dataframe(
+    correlation,
+    use_container_width=True
+)
+
+# =========================
+# HEATMAP
+# =========================
 
 st.subheader("🌈 Correlation Heatmap")
 
-fig, ax = plt.subplots(figsize=(10,6))
+fig, ax = plt.subplots(figsize=(10, 6))
 
 sns.heatmap(
     correlation,
@@ -102,34 +169,40 @@ st.pyplot(fig)
 # USER INPUTS
 # =========================
 
+st.subheader("🏠 Enter House Details")
+
 area = st.number_input(
     "Area (sqft)",
     min_value=0,
     value=1000
 )
 
-bedrooms = st.number_input(
+bedrooms = st.slider(
     "Bedrooms",
-    min_value=1,
-    value=2
+    1,
+    10,
+    2
 )
 
-bathrooms = st.number_input(
+bathrooms = st.slider(
     "Bathrooms",
-    min_value=1,
-    value=1
+    1,
+    10,
+    1
 )
 
-floors = st.number_input(
-    "floors",
-    min_value=1,
-    value=1
+floors = st.slider(
+    "Floors",
+    1,
+    5,
+    1
 )
 
-parking = st.number_input(
+parking = st.slider(
     "Parking",
-    min_value=0,
-    value=1
+    0,
+    5,
+    1
 )
 
 # =========================
@@ -148,9 +221,19 @@ if st.button("🔍 Predict House Price"):
 
     prediction = model.predict(input_data)
 
+    st.markdown("---")
+
+    st.subheader("📢 Prediction Result")
+
     st.success(
         f"🏠 Estimated House Price: ₹ {prediction[0]:,.2f}"
     )
+
+    st.info(
+        "Prediction generated using Linear Regression Model"
+    )
+
+    st.balloons()
 
 # =========================
 # FOOTER
@@ -158,6 +241,11 @@ if st.button("🔍 Predict House Price"):
 
 st.markdown("---")
 
-st.caption(
-    "Machine Learning House Price Prediction Project"
+st.markdown(
+    """
+    <center>
+    Developed with ❤️ using Streamlit & Machine Learning
+    </center>
+    """,
+    unsafe_allow_html=True
 )
