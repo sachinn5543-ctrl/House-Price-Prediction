@@ -8,7 +8,7 @@ import seaborn as sns
 model = joblib.load("app/house_price_model.pkl")
 
 # Load dataset
-df = pd.read_csv("app/Housing (2).csv")
+df = pd.read_csv("app/housing.csv")
 
 # =========================
 # SIDEBAR
