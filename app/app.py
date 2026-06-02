@@ -63,9 +63,12 @@ st.write(
     "Enter house details below to predict estimated house price."
 )
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Total Houses", len(df))
+col1.metric(
+    "Total Houses",
+    len(df)
+)
 
 col2.metric(
     "Average Price",
@@ -77,6 +80,10 @@ col3.metric(
     f"₹ {int(df['price'].max()):,}"
 )
 
+col4.metric(
+    "Model Accuracy",
+    "54.64%"
+)
 st.subheader("📊 Housing Dataset Preview")
 
 st.dataframe(df.head(10), use_container_width=True)
@@ -156,7 +163,7 @@ if st.button("🔍 Predict House Price"):
         'area': [area],
         'bedrooms': [bedrooms],
         'bathrooms': [bathrooms],
-        'flor': [floors],
+        'floors': [floors],
         'parking': [parking]
     })
 
