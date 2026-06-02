@@ -66,6 +66,11 @@ House-Price-Prediction/
 ```
 
 ---
+## Project Screenshot
+
+![Dashboard](screenshot.png)
+
+---
 
 ## 👨‍💻 Author
 
