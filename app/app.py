@@ -130,20 +130,20 @@ area = st.number_input(
 bedrooms = st.slider(
     "Bedrooms",
     1,
-    10,
-    2
+    5,
+    1
 )
-
-bathrooms = st.number_input(
+bathrooms = st.slider(
     "Bathrooms",
-    min_value=1,
-    value=1
+    1,
+    4,
+    1
 )
 
 floors = st.slider(
     "Floors",
     1,
-    5,
+    4,
     1
 )
 
