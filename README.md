@@ -70,7 +70,8 @@ https://house-price-prediction-qkr2sthvtdagrmuboqhy5r.streamlit.app
 
 ## Project Screenshot
 
-![Dashboard](screenshot.png)
+<img width="2871" height="1617" alt="Screenshot 2026-06-02 191031" src="https://github.com/user-attachments/assets/1b7479ee-87c3-4399-8b6e-e9e360dcf146" />
+
 
 ---
 
