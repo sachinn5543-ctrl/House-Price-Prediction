@@ -77,4 +77,4 @@ https://house-price-prediction-qkr2sthvtdagrmuboqhy5r.streamlit.app
 
 ## 👨‍💻 Author
 
-Sachin
+Sachin N
