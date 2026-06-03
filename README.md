@@ -70,7 +70,7 @@ https://house-price-prediction-qkr2sthvtdagrmuboqhy5r.streamlit.app
 
 ## Project Screenshot
 
-![Dashboard](screenshot.png)
+Screenshot 2026-06-02 191031.png
 
 ---
 
