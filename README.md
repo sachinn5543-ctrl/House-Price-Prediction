@@ -2,10 +2,6 @@
 
 A Machine Learning web application that predicts house prices based on property features.
 
-## 🚀 Live Demo
-
-https://house-price-prediction-qkr2sthvtdagrmuboqhy5r.streamlit.app
-
 ---
 
 ## 📌 Features
@@ -63,9 +59,15 @@ House-Price-Prediction/
 │
 ├── requirements.txt
 ├── README.md
+
 ```
 
+## 🚀 Live Demo
+
+https://house-price-prediction-qkr2sthvtdagrmuboqhy5r.streamlit.app
+
 ---
+
 ## Project Screenshot
 
 ![Dashboard](screenshot.png)
